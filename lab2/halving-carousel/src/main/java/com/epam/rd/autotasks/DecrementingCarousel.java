@@ -1,0 +1,31 @@
+package com.epam.rd.autotasks;
+
+public class DecrementingCarousel {
+    protected final int[] elements;
+    private int currentIndex = 0;
+    protected boolean isRunning = false;
+
+    public DecrementingCarousel(int capacity) {
+        if (capacity>0){
+            elements = new int[capacity];
+        }else
+            throw new IllegalArgumentException();
+    }
+
+    public boolean addElement(int element){
+        if (isRunning)
+            return false;
+        if (element <=0 || currentIndex == elements.length)
+            return false;
+        elements[currentIndex++]= element;
+        return true;
+    }
+
+    public CarouselRun run(){
+        if (isRunning)
+            return null;
+        isRunning = true;
+        return new CarouselRun(elements);
+    }
+}
+
